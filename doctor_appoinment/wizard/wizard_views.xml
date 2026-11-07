@@ -1,0 +1,79 @@
+<odoo>
+    <record id="view_appointment_cancel_wizard_form" model="ir.ui.view">
+        <field name="name">Remark</field>
+        <field name="model">reminder.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <style>
+                        .appointment_list_table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 20px;
+                        }
+                        .appointment_list_table th {
+                        background-color:#11a531;
+                        color: white;
+                        padding: 10px;
+                        text-align: left;
+                        font-weight: bold;
+                        }
+                        .appointment_list_table td {
+                        padding: 8px 10px;
+                        border-bottom: 1px solid #dee2e6;
+                        }
+
+                        .appointment_list_table tr:nth-child(even) {
+                        background-color: #f2f9ff;
+                        }
+
+                        .low-opacity-bold {
+                        font-weight: bold;
+                        color: rgba(0, 0, 0, 0.5);
+                        }
+                    </style>
+                <group>
+                    <field name="appointment_id" readonly="1" invisible="1"/>
+                    <div>
+                        <strong>Are U sure TO Cancel The Record</strong>
+                    </div>
+                    <div>
+                        <table class="appointment_list_table">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Patient</th>
+                                    <th>Age</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <field name="appointment_seq" string="Order No."/>
+                                    </td>
+                                    <td>
+                                        <field name="patient_name" string="Patient Name"/>
+                                    </td>
+                                    <td>
+                                        <field name="patient_age" string="Age"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </group>
+                <footer>
+                    <button name="cancel_button_wizard" type="object" string="Yes" class="btn-secondary"/>
+                    <button string="NO" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cancel_appointment_wizard" model="ir.actions.act_window">
+        <field name="name">Remark</field>
+        <field name="res_model">reminder.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_appointment_cancel_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

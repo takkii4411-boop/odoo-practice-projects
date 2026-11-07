@@ -1,0 +1,100 @@
+
+.my_doctor_list {
+
+    th[data-name="age"] {
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        width: 37px !important;
+    }
+
+    .doc_age_list {
+        text-align: center !important;
+        justify-content: center !important;
+        display: flex !important;
+    }
+
+th[data-name="patient_age"] {
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        width: 37px !important;
+    }
+
+.patients_age_list {
+        text-align: center !important;
+        justify-content: center !important;
+        display: flex !important;
+    }
+
+    .doc_seq_list {
+        width: 98px !important;
+    }
+
+    .doc_name_list {
+        min-width: 30ch !important;
+        max-width: 50ch !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    th[data-name="gender"], .doc_gender_list {
+        text-align: center !important;
+        justify-content: center !important;
+    }
+
+    th[data-name="dob"], .doc_dob_list {
+        width: 137px !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+
+    th[data-name="contact"], .doc_contact_list {
+        text-align: center !important;
+        justify-content: center !important;
+        min-width: 16ch !important;
+    }
+
+    .doc_email_list {
+        min-width: 30ch !important;
+        max-width: 50ch !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+}
+
+.inheritpatient_list{
+
+      th[data-name="appointment_date"],.appointment{
+
+        width: 122px !important;
+        text-align: center !important;
+        justify-content: center !important;
+
+        }
+      th[data-name="name"],.seq{
+
+        width: 80px !important;
+        text-align: center !important;
+        justify-content: center !important;
+
+        }
+    th[data-name="doctor_fee"] {
+                display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        }
+
+        .doc_fee{
+
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+
+        }
+
+    }

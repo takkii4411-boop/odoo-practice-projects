@@ -1,0 +1,34 @@
+<odoo>
+    <record id="patient_view_form_inherit" model="ir.ui.view">
+        <field name="name">hospital.patient.inherit.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="inherit_id" ref="patient_management.patient_view_form"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//sheet">-->
+
+<!--                <field name="appointment_ids">-->
+<!--                    <list class="inheritpatient_list">-->
+<!--                        <field name="name" readonly="1" string="Oreder" class="seq"/>-->
+<!--                        <field name="appointment_date" string="Appoin On" class="appointment"/>-->
+<!--                        <field name="reason"/>-->
+<!--                        <field name="doc_respect_name"/>-->
+<!--                        <field name="doctor_fee" class="doc_fee"/>-->
+<!--                        <field name="appointment_time"/>-->
+<!--                        <field name="stage" widget="badge" decoration-warning="stage == 'draft'"-->
+<!--                               decoration-success="stage == 'done'" decoration-danger="stage == 'cancel'"-->
+<!--                               decoration-info="stage == 'confirmed'"/>-->
+
+<!--                        <field name="notes"/>-->
+<!--                    </list>-->
+<!--                </field>-->
+<!--            </xpath>-->
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button type="object" name="action_view_appointments" class="oe_stat_button" icon="fa-calendar">
+                        <field name="appointment_count" widget="statinfo" string="  Appointment's"/>
+                    </button>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>

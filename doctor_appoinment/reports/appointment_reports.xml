@@ -1,0 +1,201 @@
+<odoo>
+
+    <template id="report_appointment_detail">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page"
+                         style="border:1px solid; padding:0; font-family:Arial; border-radius:8px;">
+                        <style>
+                            .appointment_table td,
+                            .doctor_table td,
+                            .patient_table td{
+                            padding: 12px !important;
+                            vertical-align: middle;
+                            width:50%;
+                            }
+                        </style>
+                        <div style="background:#3a8dcf; color:white; padding:15px; text-align:center;
+                                     font-size:23px; font-weight:bold; text-transform: uppercase;">
+                            <h1>Appointment Recipt</h1>
+                        </div>
+                        <div style="padding:15px">
+                            <div class="text-center mt-4 mb-4" style="vertical-align: middle;">
+                                <t t-set="status_color" t-value="'#2ECC71'"/>
+                                <t t-if="o.stage == 'draft'" t-set="status_color" t-value="'#F39C12'"/>
+                                <t t-if="o.stage == 'done'" t-set="status_color" t-value="'#3498DB'"/>
+                                <t t-if="o.stage == 'cancel'" t-set="status_color" t-value="'#E74C3C'"/>
+                                <span class="badge rounded-pill"
+                                      t-attf-style="border: 2px solid {{status_color}};color: {{status_color}};
+                                     background-color: white !important; font-size: 22px; padding: 8px 35px;
+                                     display: inline-block; text-transform: uppercase;
+                                     border-radius: 50px; font-weight: bold;">
+                                    <span t-field="o.stage"/>
+                                </span>
+                            </div>
+                            <div>
+                                <table width="90%" class="table appointment_table">
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Appointment Number:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <strong style="color: #58C2EB;">
+                                                <span t-field="o.name"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Appointment Date:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="o.appointment_date"
+                                                      t-options='{"widget": "date", "format": "MMMM dd, yyyy"}'/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Appointment Time:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="o.appointment_time"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <div class="alert alert-success p-3" style="border-left:6px solid #11a531; color: #11a531;">
+                                <h3>Patient Information</h3>
+                                <table width="90%" class="table patient_table">
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Patient Name:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.respect_patient_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Patient ID:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.patient_ids"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Patient Age:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.patient_age"/>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div class="alert alert-info p-3" style="color: #58C2EB; border-left:6px solid #58C2EB;">
+                                <h3>Doctor Information</h3>
+                                <table width="90%" class="table doctor_table">
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Doctor Name:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.doc_respect_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Dpoctor ID:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.doctor_ids"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Specialization:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.specialization"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Consultation Fee:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.doctor_fee" class="text-success fw-bold"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="border-1  p-3">
+                                <table width="90%" class="table appointment_table">
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Resion for Visit:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="o.reason"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">
+                                                <strong style="color: #58C2EB;">Extra Note:</strong>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="o.notes"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="text-center mt-3 mb-2 fw-bold">
+                                <p style="font-size: 12px; background-color: #F8F9FA; color: rgba(0, 0, 0, 0.5); padding:20px; border-radius:8px;">
+                                    Thank you for Choosing Our hospital<br/>Hospital Management System
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>
+

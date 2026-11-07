@@ -1,0 +1,67 @@
+<odoo>
+    <template id="portal_my_home_todo" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_category')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">TO_DO</t>
+                <t t-set="text">Remainder Your Task</t>
+                <t t-set="url" t-value="'/my/tasks'"/>
+                <t t-set="icon" t-value="'/task_manegment/static/description/my_icon2.png'"/>
+                <t t-set="config_card" t-value="True"/>
+            </t>
+        </xpath>
+    </template>
+
+
+
+    <template id="my_breadcrumb" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol" position="inside">
+            <li t-if="page_name == 'todo_task_portal'" class="breadcrumb-item active">
+                My Pets
+            </li>
+        </xpath>
+
+        <xpath expr="//ol" position="after">
+            <div t-if="page_name == 'todo_task_portal'" class="ml-auto d-flex align-items-center">
+                <form method="get" t-attf-action="/my/tasks" class="form-inline">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="search" class="form-control"
+                               placeholder="Search by name..." t-att-value="search"
+                               style="border-top-left-radius: 4px; border-bottom-left-radius: 4px;"/>
+                        <a t-if="search" href="/my/tasks" class="btn btn-secondary"
+                           style="border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
+                            <i class="fa fa-times"/>
+                        </a>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-search"/>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </xpath>
+        <xpath expr="//ol" position="after">
+            <t t-if="searchbar_sortings and sortby">
+                <div class="dropdown ml-auto d-flex justify-content-center align-items-center me-5">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                        <span class="fa fa-sort"/>
+                        Sort By:
+                        <t t-esc="searchbar_sortings[sortby]['label']"/>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <t t-foreach="searchbar_sortings" t-as="option">
+                            <a t-attf-href="/my/tasks?sortby=#{option}&amp;search=#{search or ''}"
+                               t-attf-class="dropdown-item #{'active' if sortby == option else ''}">
+                                <span t-esc="searchbar_sortings[option]['label']"/>
+                            </a>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+
+    </template>
+    
+    
+    
+    
+</odoo>

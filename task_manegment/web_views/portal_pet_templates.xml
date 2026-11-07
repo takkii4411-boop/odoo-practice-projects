@@ -1,0 +1,60 @@
+<odoo>
+    <template id="portal_my_tasks">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <h2>My Tasks</h2>
+                <a href="/my/tasks/new" class="btn btn-primary mb-3">Add More Task</a>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>SI.No</th>
+                            <th>Task Name</th>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="tasks" t-as="task">
+                            <tr>
+                                <td>
+                                    <t t-esc="task.task_order"/>
+                                </td>
+                                <td>
+                                    <t t-esc="task.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="task.date"/>
+                                </td>
+                                <td>
+                                    <t t-esc="task.description"/>
+                                </td>
+
+                                <td>
+                                    <a t-attf-href="/my/tasks/#{task.id}/edit" class="btn btn-sm btn-outline-primary">
+                                        <i class="fa fa-pencil-square-o"/>
+                                        Edit
+                                    </a>
+                                    |
+                                    <a t-attf-href="/my/tasks/#{task.id}/delete" class="btn btn-sm btn-outline-danger"
+                                       onclick="return confirm('Are you sure?')">
+                                        <i class="fa fa-trash"/>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </t>
+                    </tbody>
+                </table>
+                <div t-if="pager" class="o_portal_pager d-flex justify-content-center mt-3">
+                    <t t-call="portal.pager"/>
+                </div>
+            </div>
+        </t>
+
+
+    </template>
+</odoo>
+

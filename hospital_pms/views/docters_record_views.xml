@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_docters_form" model="ir.ui.view">
+        <field name="name">Docters.form</field>
+        <field name="model">hospital.docters</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <div class="oe_title">
+                                <h2>
+                                    <field name="docters_sequence" readonly="1"/>
+                                </h2>
+                            </div>
+
+                            <field name="name" string="Your Name"/>
+                            <field name="dob"/>
+                            <field name="gender" widget="radio"/>
+                            <field name="contact"/>
+                            <field name="place" widget="map"/>
+                        </group>
+                        <group>
+                            <field name="collage"/>
+                            <field name="digree"/>
+                            <field name="mark"/>
+                            <field name="image_1920"/>
+                            <field name="priview"/>
+                            <div invisible="not priview" class="mt-2">
+                                <field name="image_1920" widget="image" readonly="1" options="{'size': [60, 80]}"
+                                       class="oe_avatar"/>
+                            </div>
+                            <field name="specialty_categorys"/>
+                            <field name="masters_id"
+                                   domain="[('data_types', '=', specialty_categorys)]"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_docters_list" model="ir.ui.view">
+        <field name="name">Docters.list</field>
+        <field name="model">hospital.docters</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="image_1920" widget="image" options="{'size': [100, 90]}" string="Dr's Photo"/>
+                <field name="name" string="Dr. Name" width="200px"/>
+                <field name="gender" widget="badge"
+                       decoration-success="gender == 'Male'"
+                       decoration-warning="gender == 'Female'" width="100px"/>
+                <field name="contact" widget="phone"/>
+                <field name="docters_sequence" string="Dr's_Id"/>
+                <field name="masters_id" string="Speciality" width="240px"/>
+                <field name="status_text" widget="badge"
+                       decoration-success="status_text == 'active'"
+                       decoration-danger="status_text == 'inactive'"
+                       readonly="1" width="80px"/>
+                <field name="active" widget="boolean_toggle" width="50px"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_Docters_kanban" model="ir.ui.view">
+        <field name="name">docters.kanban</field>
+        <field name="model">hospital.docters</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="active"/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="oe_kanban_global_click d-flex" style="width:350px;">
+                            <div class="o_kanban_image me-3">
+                                <field name="image_1920" class="oe_avatar" widget="image"
+                                       options="{'size': [90, 100]}"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title" style="font-size:20px;">
+                                    <strong>Dr.</strong>
+                                    <field name="name"/>
+                                </strong>
+                                <field name="gender" widget="badge" decoration-success="gender == 'Male'"
+                                       decoration-warning="gender == 'Female'"
+                                       style="display: inline-block; position: absolute; left: 30px; bottom: 8px; padding: 0px 31px 0px 28px; "/>
+                                <p>
+                                    <strong class="fs-6 fw-bold">
+                                        <field name="masters_id"/>
+                                    </strong>
+                                     <span class="text-nowrap">Id :-</span>
+                                <field name="docters_sequence" style="margin-top:30px;"/>
+                                </p>
+                                <strong>
+                                    <field name="contact" widget="phone"/>
+                                </strong>
+                                <div class="o_kanban_record_bottom mt-2">
+                                    <div class="oe_kanban_bottom_right d-flex align-items-center"
+                                         t-attf-style="gap:8px; padding:11px 8px 4px 7px; border-radius:5px;#{record.active.raw_value == True ? 'background-color: #e6fffa;' : 'background-color: #fff5f5;'}">
+                                        <strong t-if="record.active.raw_value" style="color: #28a745;">● Duty-On
+                                        </strong>
+                                        <strong t-if="!record.active.raw_value" style="color: #dc3545;">○ Duty-Off
+                                        </strong>
+                                        <field name="active" widget="boolean_toggle" style="transform: rotate(90deg);"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_hospital_docters_graph" model="ir.ui.view">
+        <field name="name">hospital.docters.graph</field>
+        <field name="model">hospital.docters</field>
+        <field name="arch" type="xml">
+            <graph string="Patients Analysis" type="bar" sample="1">
+                <field name="name"/>
+
+                <field name="mark" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_hospital_docters_search" model="ir.ui.view">
+        <field name="name">hospital.docters.search</field>
+        <field name="model">hospital.docters</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Docters Name"/>
+                <filter string="Off-Duty Docters" name="inactive" domain="[('active', '=', False)]"/>
+                <filter string="On-Duty Docterss" name="active" domain="[('active', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Menu and Action -->
+    <record id="action_docters" model="ir.actions.act_window">
+        <field name="name">DOC-RECORD</field>
+        <field name="res_model">hospital.docters</field>
+        <field name="view_mode">list,form,kanban,graph</field>
+    </record>
+
+    <menuitem id="menu_dms" name="DMS" parent="menu_hospital_pms_record" action="action_docters" sequence="2"/>
+</odoo>

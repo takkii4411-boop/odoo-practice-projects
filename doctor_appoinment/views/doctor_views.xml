@@ -1,0 +1,92 @@
+<odoo>
+    <!--    Form view of doctor-->
+    <record id="doctor_view_form" model="ir.ui.view">
+        <field name="name">hospital.doctor.form</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object" name="action_view_appointments" class="oe_stat_button" icon="fa-calendar">
+                        <field name="appointment_count" widget="statinfo" string="  Appointment's"/>
+                    </button>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="doctor_seq" readonly="1"/>
+                            <field name="name" placeholder="Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+
+                            <field name="dob" placeholder="DD/MM/YYYY"/>
+                            <field name="gender" widget="radio"/>
+                            <field name="age"/>
+                            <field name="specialization"/>
+                            <field name="experience_years"/>
+                            <field name="consultation_fee"/>
+
+                        </group>
+                        <group>
+                            <field name="image"/>
+                            <field name="priview" max-width="20"/>
+                            <div invisible="not priview" class="mt-2">
+                                <field name="image" widget="image" readonly="1" options="{'size': [70, 80]}"
+                                       class="oe_avatar"/>
+                            </div>
+
+                            <field name="contact" placeholder="e.g. +91 9876543210"/>
+                            <field name="email" placeholder="example@doctor.com"/>
+                            <field name="place"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Appointments History" name="appointment_page">
+                            <field name="appointment_id">
+                                <list>
+                                    <field name="name" readonly="1" string="Oreder" class="seq"/>
+                                    <field name="patient_id" string="Patients"/>
+                                    <field name="appointment_date" string="Appoin On" class="appointment"/>
+                                    <field name="reason"/>
+                                    <field name="appointment_time"/>
+                                    <field name="stage" widget="badge" decoration-warning="stage == 'draft'"
+                                           decoration-success="stage == 'done'" decoration-danger="stage == 'cancel'"
+                                           decoration-info="stage == 'confirmed'"/>
+                                    <field name="notes"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--    List view-->
+    <record id="doctor_view_list" model="ir.ui.view">
+        <field name="name">hospital.doctor.list</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <list class="my_doctor_list">
+                <field name="doctor_seq" class="doc_seq_list" string="Order"/>
+                <field name="respect_name" class="doc_name_list" string="Name"/>
+                <field name="age" class="doc_age_list"/>
+                <field name="gender" widget="badge" decoration-success="gender == 'male'"
+                       decoration-warning="gender == 'female'" optional="hide" class="doc_gender_list"/>
+                <field name="dob" class="doc_dob_list"/>
+                <field name="contact" class="doc_contact_list"/>
+                <field name="email" class="doc_email_list"/>
+            </list>
+        </field>
+    </record>
+    <!--Action Window-->
+    <record id="action_hospital_doctor" model="ir.actions.act_window">
+        <field name="name">doctor</field>
+        <field name="res_model">hospital.doctor</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!--  Menu item-->
+    <menuitem id="menu_hospital_doctor" name="Doctor" parent="patient_management.menu_my_detail"
+              action="action_hospital_doctor" sequence="2"/>
+</odoo>

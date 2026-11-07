@@ -1,0 +1,62 @@
+<odoo>
+    <template id="portal_todo_form">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3>
+                            <t t-if="task">Edit Task</t>
+                            <t t-else="">Add New Task</t>
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/my/tasks/save" method="post">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <input type="hidden" name="task_id" t-att-value="task.id if task else ''"/>
+
+                            <div class="form-group mb-3">
+                                <label class="fw-bold">Task Name</label>
+                                <input type="text" name="name" class="form-control"
+                                       t-att-value="task.name if task else ''" required="1"
+                                       placeholder="example. Buy Groceries"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="fw-bold">Target Date</label>
+                                <input type="date" name="date" class="form-control"
+                                       t-att-value="task.date if task else ''"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="fw-bold">Description</label>
+                                <textarea name="description" class="form-control" rows="4"
+                                          placeholder="Enter task details..."><t t-esc="task.description if task else ''"/></textarea>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-success">Save Task</button>
+                                <a href="/my/tasks" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_my_tasks_breadcrumb_form" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol" position="inside">
+            <li t-if="page_name == 'todo_form'" class="breadcrumb-item">
+                <a href="/my/tasks">My To-Do</a>
+            </li>
+            <li t-if="page_name == 'todo_form'" class="breadcrumb-item active">
+                <t t-if="task">
+                    <span t-field="task.name"/>
+                </t>
+                <t t-else="">
+                    New Task
+                </t>
+            </li>
+        </xpath>
+    </template>
+</odoo>

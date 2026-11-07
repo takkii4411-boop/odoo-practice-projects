@@ -1,0 +1,17 @@
+<odoo>
+
+    <record id="seq_doctor_seq" model="ir.sequence">
+        <field name="name">doctor.seq</field>
+        <field name="code">doctor.sequence</field>
+        <field name="prefix">DOC/</field>
+        <field name="padding">3</field>
+    </record>
+
+    <record id="seq_appointment_seq" model="ir.sequence">
+        <field name="name">appointment.seq</field>
+        <field name="code">appointment.sequence</field>
+        <field name="prefix">APT/</field>
+        <field name="padding">3</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_todo_pro_list" model="ir.ui.view">
+        <field name="name">todo.task.list</field>
+        <field name="model">todo.pro</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="task_order" string="Order-of-Task"/>
+                <field name="name"/>
+                <field name="date" string="Disease"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+</odoo>

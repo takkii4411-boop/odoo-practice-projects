@@ -1,0 +1,68 @@
+<odoo>
+    <!--    Form view of patient-->
+    <record id="patient_view_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="patient_seq" readonly="1"/>
+                            <field name="name" placeholder="Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date_of_birth" placeholder="DD/MM/YYYY"/>
+                            <field name="gender" widget="radio"/>
+                            <field name="age"/>
+                            <field name="blood_group" widget="radio" options="{'horizontal':true}"/>
+                        </group>
+                        <group>
+                            <field name="image"/>
+                        <field name="priview" max-width="20"/>
+                        <div invisible="not priview" class="mt-2">
+                            <field name="image" widget="image" readonly="1" options="{'size': [70, 80]}"
+                                   class="oe_avatar"/>
+                        </div>
+                            <field name="problem"/>
+                            <field name="phone_number" placeholder="e.g. +91 9876543210"/>
+                            <field name="email" placeholder="example@doctor.com"/>
+                            <field name="address" placeholder="Flat No, Street Name, City, Pincode..."/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--    List view-->
+    <record id="patient_view_list" model="ir.ui.view">
+        <field name="name">hospital.patient.list</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <list class="my_patient_list">
+                <field name="patient_seq" class="pati_seq_list"/>
+                <field name="name" class="pati_name_list"/>
+                <field name="age" class="pati_age_list"/>
+                <field name="gender" widget="badge" decoration-success="gender == 'male'"
+                       decoration-warning="gender == 'female'" optional="hide" class="pati_gender_list"/>
+                <field name="date_of_birth" class="pati_dob_list"/>
+                <field name="phone_number" class="pati_contact_list"/>
+                <field name="email" class="pati_email_list"/>
+            </list>
+        </field>
+    </record>
+    <!--Action Window-->
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">patient</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!--  Menu item-->
+    <menuitem id="menu_my_custom_root" name="Hospital Management"/>
+    <menuitem id="menu_my_detail" name="Record" parent="menu_my_custom_root" />
+
+    <menuitem id="menu_hospital_patient" name="Patients" parent="menu_my_detail" action="action_hospital_patient" sequence="1"/>
+</odoo>

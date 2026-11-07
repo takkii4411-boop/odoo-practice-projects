@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cigarette_stock_list" model="ir.ui.view">
+        <field name="name">cigarette.stock.report.list</field>
+        <field name="model">cigarette.stock.report</field>
+        <field name="arch" type="xml">
+            <list string="Stock Reports" decoration-info="billing_date == current_date">
+                <field name="name"/>
+                <field name="billing_date"/>
+                <field name="line_ids" widget="many2many_tags" string="Brands Scanned" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_cigarette_stock_form" model="ir.ui.view">
+        <field name="name">cigarette.stock.report.form</field>
+        <field name="model">cigarette.stock.report</field>
+        <field name="arch" type="xml">
+            <form string="Stock Processing">
+                <header>
+                    <button name="process_invoice_image"
+                            string="AI Vision Se Data Nikalein"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="not image_file"
+                            confirm="Kya aap AI ke zariye data extract karna chahte hain?"/>
+
+                    <button name="process_csv_file"
+                            string="CSV Se Import Karein"
+                            type="object"
+                            invisible="not csv_file"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Report Reference"/>
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Tareekh (Date)">
+                            <field name="billing_date"/>
+                        </group>
+                        <group string="Files">
+                            <field name="csv_file" filename="csv_filename" widget="binary" string="CSV File Selection"/>
+                        </group>
+                    </group>
+
+                    <separator string="Bill Ki Photo Upload Karein"/>
+                    <group>
+                        <field name="image_file" widget="image" class="oe_avatar" options="{'size': [300, 300]}" nolabel="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Scanned Brand Details" name="details">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="brand_name" placeholder="Brand ka naam..."/>
+                                    <field name="quantity" sum="Kul Maal (Total)"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cigarette_stock" model="ir.actions.act_window">
+        <field name="name">Cigarette Stock AI</field>
+        <field name="res_model">cigarette.stock.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_cigarette_root" name="Cigarette Stock" sequence="10"/>
+    <menuitem id="menu_cigarette_ocr" name="Bill Processing" parent="menu_cigarette_root" action="action_cigarette_stock" sequence="10"/>
+</odoo>

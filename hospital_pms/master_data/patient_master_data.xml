@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="spec__2_gen_physician" model="sp.category">
+            <field name="name">General Physician / Family Doctor</field>
+            <field name="datatype">general</field>
+        </record>
+        <record id="spec__2_gen_body-checkup" model="sp.category">
+            <field name="name">Normal Body CheckUp</field>
+            <field name="datatype">checkup</field>
+        </record>
+
+        <record id="spec__2_gen_full-checkup" model="sp.category">
+            <field name="name">Full Body CheckUp</field>
+            <field name="datatype">checkup</field>
+        </record>
+        <record id="spec__2_gen_blood-checkin" model="sp.category">
+            <field name="name">Blood Test</field>
+            <field name="datatype">test</field>
+        </record>
+        <record id="spec__2_gen_urin-checkin" model="sp.category">
+            <field name="name">Urin Test</field>
+            <field name="datatype">test</field>
+        </record>
+
+        <record id="spec__2_cardio" model="sp.category">
+            <field name="name">Cardiologist (Heart)</field>
+            <field name="datatype">heart_lungs</field>
+        </record>
+        <record id="spec__2_pulmo" model="sp.category">
+            <field name="name">Pulmonologist (Lungs)</field>
+            <field name="datatype">heart_lungs</field>
+        </record>
+
+        <record id="spec__2_neuro" model="sp.category">
+            <field name="name">Neurologist (Brain &amp; Nerves)</field>
+            <field name="datatype">brain_nerves</field>
+        </record>
+        <record id="spec__2_psych" model="sp.category">
+            <field name="name">Psychiatrist (Mental Health)</field>
+            <field name="datatype">brain_nerves</field>
+        </record>
+
+        <record id="spec__2_gyno" model="sp.category">
+            <field name="name">Gynecologist (Women)</field>
+            <field name="datatype">women_children</field>
+        </record>
+        <record id="spec__2_pediatric" model="sp.category">
+            <field name="name">Pediatrician (Children)</field>
+            <field name="datatype">women_children</field>
+        </record>
+
+        <record id="spec__2_derma" model="sp.category">
+            <field name="name">Dermatologist (Skin)</field>
+            <field name="datatype">skin_eye_ent</field>
+        </record>
+        <record id="spec__2_eye" model="sp.category">
+            <field name="name">Ophthalmologist (Eye)</field>
+            <field name="datatype">skin_eye_ent</field>
+        </record>
+
+        <record id="spec__2_gastro" model="sp.category">
+            <field name="name">Gastroenterologist (Stomach/Liver)</field>
+            <field name="datatype">internal_organs</field>
+        </record>
+        <record id="spec__2_nephro" model="sp.category">
+            <field name="name">Nephrologist (Kidney)</field>
+            <field name="datatype">internal_organs</field>
+        </record>
+        <record id="spec__2_endo" model="sp.category">
+            <field name="name">Endocrinologist (Hormones/Thyroid)</field>
+            <field name="datatype">internal_organs</field>
+        </record>
+
+        <record id="spec__2_ortho" model="sp.category">
+            <field name="name">Orthopedic (Bones &amp; Joints)</field>
+            <field name="datatype">bones_muscles</field>
+        </record>
+
+        <record id="spec__2_onco" model="sp.category">
+            <field name="name">Oncologist (Cancer)</field>
+            <field name="datatype">cancer_blood</field>
+        </record>
+        <record id="spec__2_hema" model="sp.category">
+            <field name="name">Hematologist (Blood)</field>
+            <field name="datatype">cancer_blood</field>
+        </record>
+
+        <record id="spec__2_emergency" model="sp.category">
+            <field name="name">Emergency Medicine</field>
+            <field name="datatype">emergency_others</field>
+        </record>
+</odoo>
